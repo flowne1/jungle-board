@@ -1,29 +1,25 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import notesStore from "../stores/notesStore";
-import Notes from "./Notes";
-import UpdateForm from "./UpdateForm";
-import CreateForm from "./CreateForm";
+import LoginPage from "../pages/LoginPage";
+import NotesPage from "../pages/NotesPage";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 function App() {
-  // Manager for notes
-  const store = notesStore();
-
-  // Use Effects
-  useEffect(() => {
-    store.fetchNotes();
-  }, []);
-
   return (
     <div className="App">
-      {/* printing section */}
-      <Notes />
-
-      {/* create section */}
-      <CreateForm />
-
-      {/* update section */}
-      <UpdateForm />
+      <BrowserRouter>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/login">Login</Link>
+          </li>
+        </ul>
+        <Routes>
+          {/* printing NotesPage */}
+          <Route index element={<NotesPage />} />
+          <Route path="/login" element={<LoginPage />} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
