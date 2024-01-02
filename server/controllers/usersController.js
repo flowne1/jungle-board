@@ -57,16 +57,26 @@ async function login(req, res) {
   } catch (err) {
     // Error handling
     console.error(err);
-    res.status(500).send("An error occurred during the signup process.");
+    res.status(500).send("An error occurred during the login process.");
   }
 }
 
 function logout(req, res) {
-  // ??
+  try {
+    // Delete cookie
+    res.clearCookie("Authorization").status(200).send("Cookie destroyed");
+  } catch (err) {
+    res.sendStatus(500);
+  }
 }
 
 function checkAuth(req, res) {
-  res.sendStatus(200);
+  try {
+    console.log(req.user);
+    res.sendStatus(200);
+  } catch (err) {
+    res.sendStatus(500);
+  }
 }
 
 module.exports = {

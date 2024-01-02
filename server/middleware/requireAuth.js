@@ -1,20 +1,33 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/user");
 
-function requireAuth(req, res, next) {
-  // Read token off cookies
-  const token = req.cookies.Authorization; // We named our cookie to 'Authorization', and jwt in it
+async function requireAuth(req, res, next) {
+  try {
+    // Read token off cookies
+    const token = req.cookies.Authorization; // We named our cookie to 'Authorization', and jwt in it
 
-  // Verify a token symmetric
-  jwt.verify(token, process.env.SECRET, function (err, decoded) {
-    console.log(decoded.foo); // bar
-  });
+    // Decode the token
+    const decoded = jwt.verify(token, process.env.SECRET);
 
-  // Find user using decoded sub
+    // Check expiration
+    if (Date.now() > decoded.exp) {
+      return res.sendStatus(401).send("Cookie Expired!");
+    }
 
-  // Attach user to request
+    // Find user using decoded sub
+    const user = await User.findById(decoded.sub);
+    if (!user) {
+      return res.sendStatus(401);
+    }
 
-  // Continue on
-  next();
+    // Attach user to request
+    req.user = user;
+
+    // Continue on
+    next();
+  } catch (err) {
+    return res.sendStatus(401);
+  }
 }
 
 module.exports = requireAuth;
