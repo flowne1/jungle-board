@@ -1,10 +1,10 @@
-import LoginForm from "../components/LoginForm";
+import ViewForm from "../components/ViewForm";
 import styles from "../styles.module.css";
 
-export default function LoginPage() {
+export default function ViewPage() {
   return (
     <div className={styles.page}>
-      <LoginForm />
+      <ViewForm />
     </div>
   );
 }

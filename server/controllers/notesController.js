@@ -5,7 +5,6 @@ const fetchNotes = async (req, res) => {
   try {
     // Find the notes
     const notes = await Note.find({ user: req.user._id });
-
     // Respond with them
     res.json({ notes });
   } catch (error) {
@@ -15,13 +14,12 @@ const fetchNotes = async (req, res) => {
 };
 
 const fetchNote = async (req, res) => {
+  console.log("hey");
   try {
     // Get id off the url
     const noteId = req.params.id;
-
     // Find the note using that id
     const note = await Note.findOne({ _id: noteId, user: req.user._id });
-
     // Respond with the note
     res.json({ note });
   } catch (error) {
@@ -34,7 +32,6 @@ const createNote = async (req, res) => {
   try {
     // Get the sent in data off request body
     const { title, body } = req.body;
-
     // Create a note with it
     const note = await Note.create({
       title,

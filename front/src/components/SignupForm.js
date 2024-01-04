@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import authStore from "../stores/authStore";
+import styles from "../styles.module.css";
 
 export default function SignupForm() {
   const store = authStore();
@@ -15,37 +16,35 @@ export default function SignupForm() {
   };
 
   return (
-    <form onSubmit={handleSignup}>
-      email address
-      <br />
+    <form className={styles.inputForm} onSubmit={handleSignup}>
+      <span className={styles.formTitle}>회원가입</span>
+      <span className={styles.formTitle2}>email address</span>
       <input
+        className={styles.inputSignup}
         type="email"
         onChange={store.updateSignupFormField}
         value={store.signupForm.email}
         name="email"
       />
-      <br />
-      password
-      <br />
+      <span className={styles.formTitle2}>password</span>
       <input
+        className={styles.inputSignup}
         type="password"
         onChange={store.updateSignupFormField}
         value={store.signupForm.password}
         name="password"
       />
-      <br />
-      password check
-      <br />
+      <span className={styles.formTitle2}>password check</span>
       <input
+        className={styles.inputSignup}
         type="password"
         onChange={store.updateSignupFormField}
         value={store.signupForm.passwordCheck}
         name="passwordCheck"
       />
       <br />
-      <button type="submit">Signup</button>
-      <button type="button" onClick={store.logout}>
-        Logout
+      <button className={styles.buttonSubmit} type="submit">
+        Signup
       </button>
     </form>
   );

@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import authStore from "../stores/authStore";
+import styles from "../styles.module.css";
 
 export default function LoginForm() {
   const store = authStore();
@@ -15,29 +16,32 @@ export default function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleLogin}>
-      email address
-      <br />
+    <form className={styles.inputForm} onSubmit={handleLogin}>
+      <span className={styles.formTitle}>로그인</span>
+      <span>이메일과 비밀번호를 입력하세요</span>
+      {/* <span className={styles.formTitle2}>email address</span> */}
       <input
+        className={styles.inputLogin}
         type="email"
         onChange={store.updateLoginFormField}
         value={store.loginForm.email}
         name="email"
+        placeholder="이메일"
       />
-      <br />
-      password
-      <br />
+      {/* <span className={styles.formTitle2}>password</span> */}
       <input
+        className={styles.inputLogin}
         type="password"
         onChange={store.updateLoginFormField}
         value={store.loginForm.password}
         name="password"
+        placeholder="패스워드"
       />
-      <br />
-      <button type="submit">Login</button>
-      <button type="button" onClick={store.logout}>
-        Logout
-      </button>
+      <div>
+        <button className={styles.buttonLogin} type="submit">
+          로그인
+        </button>
+      </div>
     </form>
   );
 }

@@ -1,14 +1,21 @@
 import notesStore from "../stores/notesStore";
-import Note from "./Note";
+import CardForm from "./CardForm";
+import styles from "../styles.module.css";
 
 export default function Notes() {
   const store = notesStore();
+
+  // store.notes가 undefined이거나 배열이 아닐 경우 빈 배열로 처리
+  const notes = store.notes ?? [];
+
+  // Reverse order of notes
+  const reversedNotes = [...notes].reverse();
+
   return (
-    <div>
-      <h2>Notes : </h2>
-      {store.notes &&
-        store.notes.map((note) => {
-          return <Note key={note._id} note={note} />;
+    <div className={styles.cardPage}>
+      {reversedNotes &&
+        reversedNotes.map((note) => {
+          return <CardForm key={note._id} note={note} />;
         })}
     </div>
   );

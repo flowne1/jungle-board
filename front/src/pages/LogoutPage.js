@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import authStore from "../stores/authStore";
+import styles from "../styles.module.css";
 
 function LogoutPage() {
   // When entering this page, just call logout
@@ -9,7 +10,11 @@ function LogoutPage() {
   }, []);
 
   // Print logout message
-  return <h1>You are now logged out!</h1>;
+  return (
+    <div className={styles.page}>
+      <h1>You are now logged out!</h1>
+    </div>
+  );
 }
 
 export default LogoutPage;

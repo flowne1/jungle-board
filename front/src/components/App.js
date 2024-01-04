@@ -4,27 +4,18 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
 import SignupPage from "../pages/SignupPage";
 import LogoutPage from "../pages/LogoutPage";
+import styles from "../styles.module.css";
+import Navbar from "./Navbar";
+import CreatePage from "../pages/CreatePage";
+import ViewPage from "../pages/ViewPage";
 
 function App() {
   return (
-    <div className="App">
+    <div className={styles.App}>
       <BrowserRouter>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/login">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">Signup</Link>
-          </li>
-          <li>
-            <Link to="/logout">Logout</Link>
-          </li>
-        </ul>
+        <Navbar />
         <Routes>
-          {/* printing NotesPage */}
+          {/* printing mainpage, which is list of cards */}
           <Route
             index
             element={
@@ -35,10 +26,21 @@ function App() {
           />
           {/* printing LoginPage */}
           <Route path="/login" element={<LoginPage />} />
+          {/* printing CreatePage */}
+          <Route
+            path="/create"
+            element={
+              <RequireAuth>
+                <CreatePage />
+              </RequireAuth>
+            }
+          />
           {/* printing SignupPage */}
           <Route path="/signup" element={<SignupPage />} />
           {/* printing LogoutPage */}
           <Route path="/logout" element={<LogoutPage />} />
+          {/* printing ViewPage */}
+          <Route path="/viewpage/:noteId" element={<ViewPage />} />
         </Routes>
       </BrowserRouter>
     </div>

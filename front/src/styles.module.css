@@ -1,0 +1,196 @@
+/* shared variables */
+:root {
+  --navbar-height: 6%;
+}
+
+/* @font-face 규칙을 사용하여 외부 폰트 정의 */
+@font-face {
+  font-family: "DOSIyagiMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* global style */
+.App {
+  width: 100%;
+  font-family: "DOSIyagiMedium";
+  background-color: white;
+}
+/* 모든 input 요소의 placeholder 스타일 변경 */
+input::placeholder {
+  color: gray; /* 색상 변경 */
+  font-size: 20px; /* 폰트 크기 변경 */
+}
+textarea::placeholder {
+  color: gray; /* 색상 변경 */
+  font-size: 20px; /* 폰트 크기 변경 */
+}
+/* navbar */
+.navbar {
+  font-family: "DOSIyagiMedium";
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--navbar-height);
+  background-color: #333;
+  color: white;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.navbar ul {
+  padding: 0;
+  margin-right: 20px;
+  font-size: 20px;
+}
+
+.navbar li {
+  display: inline;
+  margin: 0 10px;
+  padding: 5px 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s; /* 애니메이션 효과 */
+}
+
+.navbar li:hover {
+  background-color: grey; /* 호버 시 텍스트 색상 */
+  border-radius: 5px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+}
+
+/* pages */
+.page {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--navbar-height);
+}
+
+/* view page */
+.viewpage {
+}
+.viewpageTitle {
+  width: 800px;
+  font-size: 50px;
+}
+.viewpageImg {
+}
+.viewpageBody {
+  padding-top: 10px;
+  font-family: sans-serif;
+  width: 800px;
+  font-size: 25px;
+}
+.viewpageTime {
+  width: 800px;
+  font-size: 30px;
+  color: grey;
+}
+
+/* cards */
+.cardPage {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--navbar-height);
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 350px;
+  margin: 10px;
+  box-shadow: 3px 3ch 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease-in-out; /* 변화를 위한 부드러운 전환 */
+}
+
+.cardContainer:hover {
+  transform: scale(1.05); /* 카드를 5% 확대 */
+}
+.cardImg {
+  width: 100%;
+}
+
+.cardTitle {
+  text-align: center;
+  font-size: 30px;
+  padding: 30px;
+}
+.cardDate {
+  padding: 10px;
+}
+
+/* inputs */
+.inputForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.formTitle {
+  font-size: 50px;
+}
+.formTitle2 {
+  font-size: 25px;
+}
+
+.inputLogin {
+  font-size: 20px;
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+}
+
+.inputSignup {
+  font-size: 20px;
+  width: 300px;
+  height: 50px;
+  margin: 10px;
+}
+
+.inputTitle {
+  font-size: 1.25rem; /* 20px 대신 */
+  width: 700px;
+  height: 2rem; /* 30px 대신, 글꼴 크기에 따라 조정될 수 있도록 */
+}
+
+.inputBody {
+  font-size: 1rem; /* 16px 대신 */
+  width: 700px;
+  height: 31.25rem; /* 500px 대신 */
+}
+
+.buttonSubmit {
+  width: 150px;
+  height: 50px;
+  font-family: "DOSIyagiMedium";
+  margin: 20px;
+  font-size: 20px;
+}
+
+.buttonLogin {
+  font-family: "DOSIyagiMedium";
+  font-size: 20px;
+  width: 309px;
+  height: 50px;
+  margin: 10px;
+}

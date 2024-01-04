@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import notesStore from "../stores/notesStore";
 import Notes from "../components/Notes";
-import CreateForm from "../components/CreateForm";
-import UpdateForm from "../components/UpdateForm";
+import styles from "../styles.module.css";
 
 export default function NotesPage() {
   // Manager for notes
@@ -12,16 +11,10 @@ export default function NotesPage() {
   useEffect(() => {
     store.fetchNotes();
   }, []);
+
   return (
-    <div>
-      {/* printing section */}
+    <div className={styles.cardPage}>
       <Notes />
-
-      {/* create section */}
-      <CreateForm />
-
-      {/* update section */}
-      <UpdateForm />
     </div>
   );
 }

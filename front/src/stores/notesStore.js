@@ -4,6 +4,8 @@ import axios from "axios";
 const notesStore = create((set, get) => ({
   notes: null,
 
+  viewNote: null,
+
   createForm: {
     title: "",
     body: "",
@@ -15,16 +17,30 @@ const notesStore = create((set, get) => ({
   },
 
   fetchNotes: async () => {
-    // Fetch the notes
-    const res = await axios.get("/notes");
+    try {
+      // Fetch the notes
+      const res = await axios.get("/notes");
 
-    // Set to state
-    set({ notes: res.data.notes });
+      // Set to state
+      set({ notes: res.data.notes });
+    } catch (error) {
+      console.error("Error fetching note", error);
+    }
+  },
+
+  fetchNote: async (noteId) => {
+    try {
+      // Find by noteId and fetch the note
+      const res = await axios.get(`/notes/${noteId}`);
+
+      // Return proper note
+      set({ viewNote: res.data.note });
+    } catch (error) {
+      console.error("Error fetching note", error);
+    }
   },
 
   createNote: async (e) => {
-    e.preventDefault();
-
     const { createForm, notes } = notesStore.getState();
 
     // Create the note
