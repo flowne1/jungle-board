@@ -14,7 +14,6 @@ const fetchNotes = async (req, res) => {
 };
 
 const fetchNote = async (req, res) => {
-  console.log("hey");
   try {
     // Get id off the url
     const noteId = req.params.id;
@@ -31,14 +30,15 @@ const fetchNote = async (req, res) => {
 const createNote = async (req, res) => {
   try {
     // Get the sent in data off request body
-    const { title, body } = req.body;
+    const { createForm, starRatingAll } = req.body;
+    console.log(createForm), console.log(starRatingAll);
     // Create a note with it
     const note = await Note.create({
-      title,
-      body,
+      title: createForm.title,
+      body: createForm.body,
       user: req.user._id,
+      starRatingAll,
     });
-
     // Respond with the new note
     res.json({ note });
   } catch (error) {

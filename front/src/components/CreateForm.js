@@ -1,6 +1,7 @@
 import notesStore from "../stores/notesStore";
 import styles from "../styles.module.css";
 import { useNavigate } from "react-router-dom";
+import StarRatingForm from "./StarRatingForm";
 
 export default function CreateForm() {
   const store = notesStore();
@@ -27,6 +28,9 @@ export default function CreateForm() {
         placeholder="제목을 입력하세요"
       />
       <br />
+      <StarRatingForm ratingName="starRatingA" />
+      <StarRatingForm ratingName="starRatingB" />
+      <br />
       <textarea
         className={styles.inputBody}
         onChange={store.updateCreateFormField}
@@ -35,7 +39,7 @@ export default function CreateForm() {
         placeholder="내용을 입력하세요"
       />
       <br />
-      <button className={styles.buttonSubmit} type="submit">
+      <button className={styles.buttonCreate} type="submit">
         Create note
       </button>
     </form>

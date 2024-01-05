@@ -13,8 +13,10 @@ const noteSchema = new mongoose.Schema(
       default: Date.now,
     },
     playTime: Number,
-    starRatingA: Number,
-    starRatingB: Number,
+    starRatingAll: {
+      starRatingA: Number,
+      starRatingB: Number,
+    },
     starRatingOverall: Number,
   },
   {

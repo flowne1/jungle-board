@@ -41,20 +41,34 @@ const notesStore = create((set, get) => ({
   },
 
   createNote: async (e) => {
-    const { createForm, notes } = notesStore.getState();
+    try {
+      const { createForm, notes, starRatingAll } = notesStore.getState();
 
-    // Create the note
-    const res = await axios.post("/notes", createForm);
+      // Make object to be sent to server
+      const createData = {
+        createForm,
+        starRatingAll,
+      };
 
-    // Update and clear form state
-    set({
-      notes: [...notes, res.data.note],
-      // Clear form state
-      createForm: {
-        title: "",
-        body: "",
-      },
-    });
+      // Create the note
+      const res = await axios.post("/notes", createData);
+
+      // Update and clear form state
+      set({
+        notes: [...notes, res.data.note],
+        createForm: {
+          title: "",
+          body: "",
+        },
+        starRatingAll: {
+          starRatingA: 0,
+          starRatingB: 0,
+        },
+      });
+    } catch (error) {
+      // Handle the error appropriately
+      console.error("Error creating note:", error);
+    }
   },
 
   updateCreateFormField: (e) => {
@@ -72,7 +86,6 @@ const notesStore = create((set, get) => ({
 
   updateNote: async () => {
     const { updateForm } = notesStore.getState();
-    // Delete the note
     await axios.put(`/notes/${updateForm._id}`, updateForm);
   },
 
@@ -107,6 +120,22 @@ const notesStore = create((set, get) => ({
 
     // Update state
     await get().fetchNotes();
+  },
+
+  starRatingAll: {
+    starRatingA: 0,
+    starRatingB: 0,
+  },
+
+  setStarRating: (name, value) => {
+    set((state) => {
+      return {
+        starRatingAll: {
+          ...state.starRatingAll,
+          [name]: value,
+        },
+      };
+    });
   },
 }));
 

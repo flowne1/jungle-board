@@ -9,6 +9,13 @@ export default function SignupForm() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
+    // Pre-check for password
+    if (store.signupForm.password !== store.signupForm.passwordCheck) {
+      console.log("passwordmismatch!!!!!!!!!!!!");
+      store.setPasswordMatched(false);
+      return;
+    }
+
     await store.signup();
 
     // After signup, navigate to login page
@@ -35,6 +42,9 @@ export default function SignupForm() {
         name="password"
       />
       <span className={styles.formTitle2}>password check</span>
+      {store.passwordMatched === false && (
+        <div className={styles.tooltip}>패스워드가 일치하지 않습니다!</div>
+      )}
       <input
         className={styles.inputSignup}
         type="password"
@@ -43,7 +53,7 @@ export default function SignupForm() {
         name="passwordCheck"
       />
       <br />
-      <button className={styles.buttonSubmit} type="submit">
+      <button className={styles.buttonSignup} type="submit">
         Signup
       </button>
     </form>

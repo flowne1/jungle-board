@@ -120,6 +120,10 @@ const authStore = create((set) => ({
       set({ loggedIn: false });
     }
   },
+
+  passwordMatched: null,
+
+  setPasswordMatched: (matched) => set({ passwordMatched: matched }),
 }));
 
 export default authStore;
