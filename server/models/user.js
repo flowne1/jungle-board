@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  steamId: {
+    type: String,
+  },
+  steamId64: {
+    type: String,
+  },
   notes: [{ type: mongoose.Schema.Types.ObjectId, ref: "Note" }],
 });
 

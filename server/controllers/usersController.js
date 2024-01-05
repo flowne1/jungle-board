@@ -6,13 +6,21 @@ const jwt = require("jsonwebtoken");
 async function signup(req, res) {
   try {
     // Get data from client
-    const { email: userEmail, password: userPassword } = req.body;
+    const {
+      email: userEmail,
+      password: userPassword,
+      steamId: userSteamId,
+    } = req.body;
 
     // Create hashed password
     const hashedUserPassword = await bcrypt.hash(userPassword, saltRounds);
 
     // Create user with the data
-    await User.create({ email: userEmail, password: hashedUserPassword });
+    await User.create({
+      email: userEmail,
+      password: hashedUserPassword,
+      steamId: userSteamId,
+    });
 
     // Send success response
     res.sendStatus(200);

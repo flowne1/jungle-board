@@ -16,9 +16,14 @@ export default function Navbar() {
           <Link to="/create">글쓰기</Link>
         </li>
         {store.loggedIn && (
-          <li>
-            <Link to="/logout">로그아웃</Link>
-          </li>
+          <>
+            <li>
+              <Link to="/steam/owned-games">보유중인 게임</Link>
+            </li>
+            <li>
+              <Link to="/logout">로그아웃</Link>
+            </li>
+          </>
         )}
         {!store.loggedIn && (
           <>

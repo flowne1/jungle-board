@@ -137,6 +137,53 @@ textarea::placeholder {
 .cardDate {
   padding: 10px;
 }
+/* Owned game page */
+.ownedGamesPage {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: var(--navbar-height);
+}
+
+.gameCardContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.gameCardForm {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  border-radius: 10px;
+  width: 800px;
+  margin: 10px;
+  box-shadow: 1px 1ch 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s ease-in-out; /* 변화를 위한 부드러운 전환 */
+}
+
+.gameCardImg {
+  width: 50px;
+  border-radius: 5px;
+  padding: 5px;
+}
+.gameCardContents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gameCardTitle {
+  font-size: 20px;
+}
+.gameCardPlayTime {
+  font-size: 15px;
+}
+.gameCardReviewBtn {
+  margin-left: auto;
+}
 
 /* inputs */
 .inputForm {

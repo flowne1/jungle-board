@@ -10,6 +10,7 @@ const connectToDb = require("./config/connectToDb");
 const Note = require("./models/note");
 const notesController = require("./controllers/notesController");
 const usersController = require("./controllers/usersController");
+const steamController = require("./controllers/steamController");
 const cookieParser = require("cookie-parser");
 const requireAuth = require("./middleware/requireAuth");
 
@@ -34,16 +35,26 @@ app.get("/", (req, res) => {
   res.json({ main: "page" });
 });
 
+// Auth - related APIs
 app.post("/signup", usersController.signup);
 app.post("/login", usersController.login);
 app.get("/logout", usersController.logout);
 app.get("/check-auth", requireAuth, usersController.checkAuth);
 
+// Note - related APIs
 app.get("/notes", requireAuth, notesController.fetchNotes);
 app.get("/notes/:id", requireAuth, notesController.fetchNote);
 app.post("/notes", requireAuth, notesController.createNote);
 app.put("/notes/:id", requireAuth, notesController.updateNote);
 app.delete("/notes/:id", requireAuth, notesController.deleteNote);
+
+// Steam - related APIs
+app.get("/steam/owned-games", requireAuth, steamController.getOwnedGames);
+app.get(
+  "/steam/get-user-from-token",
+  requireAuth,
+  steamController.getUserFromToken
+);
 
 // Start our server
 app.listen(process.env.PORT);

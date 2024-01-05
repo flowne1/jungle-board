@@ -8,6 +8,7 @@ import styles from "../styles.module.css";
 import Navbar from "./Navbar";
 import CreatePage from "../pages/CreatePage";
 import ViewPage from "../pages/ViewPage";
+import OwnedGamesPage from "../pages/OwnedGamesPage";
 
 function App() {
   return (
@@ -41,6 +42,8 @@ function App() {
           <Route path="/logout" element={<LogoutPage />} />
           {/* printing ViewPage */}
           <Route path="/viewpage/:noteId" element={<ViewPage />} />
+          {/* printing OwnedGamesPage */}
+          <Route path="/steam/owned-games" element={<OwnedGamesPage />} />
         </Routes>
       </BrowserRouter>
     </div>
