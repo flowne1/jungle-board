@@ -55,6 +55,11 @@ app.get(
   requireAuth,
   steamController.getUserFromToken
 );
+app.get(
+  "/steam/app-details/:appid",
+  requireAuth,
+  steamController.getAppDetails
+);
 
 // Start our server
 app.listen(process.env.PORT);

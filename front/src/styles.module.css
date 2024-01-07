@@ -12,10 +12,18 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "SUIT-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* global style */
 .App {
   width: 100%;
-  font-family: "DOSIyagiMedium";
+  font-family: "SUIT-Regular";
   background-color: white;
 }
 /* 모든 input 요소의 placeholder 스타일 변경 */
@@ -79,10 +87,109 @@ textarea::placeholder {
   padding-top: var(--navbar-height);
 }
 
+.gameInfoContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.gameInfoImg {
+  width: 250px;
+  height: 120px;
+  padding-right: 10px;
+}
+
+.gameInfoDetails {
+  padding-left: 10px;
+  flex-grow: 1;
+}
+
+.gameInfoTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gameInfoTitleText {
+  font-size: 30px;
+  padding: 20px;
+}
+
+.gameInfoContents {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gameInfoContainer label {
+  display: grid;
+  grid-template-columns: 150px 1fr; /* 첫 번째 컬럼의 너비를 고정하고, 나머지 공간은 입력 필드가 차지 */
+  gap: 10px; /* 라벨과 입력 필드 사이의 간격 */
+  align-items: center;
+  margin-bottom: 10px;
+  border-left: 1px solid grey;
+  padding-left: 10px;
+}
+
+.gameInfoContainer label span:first-child {
+  min-width: 100px; /* 라벨 텍스트의 최소 너비 설정 */
+  margin-right: 10px; /* 텍스트와 입력 필드 사이의 간격 */
+}
+
+.gameInfoContainer label input {
+  flex-grow: 1; /* 입력 필드가 남은 공간을 채우도록 함 */
+}
+
+.gameInfoContainer input::placeholder {
+  font-size: 13px;
+}
+
+.gameInfoPrintContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.gameInfoPrintImg {
+  padding: 20px;
+  width: 400px;
+}
+
+.gameInfoItemsAll {
+  flex-grow: 1;
+}
+
+.gameInfoItem {
+  font-size: 15px;
+  border-left: 1px solid black;
+  margin-bottom: 10px; /* 각 항목 사이의 여백 */
+  padding: 5px; /* 안쪽 여백 */
+  border-bottom: 1px solid #ccc; /* 하단에 경계선 추가 */
+  /* 여기에 필요한 추가 스타일을 추가할 수 있습니다 */
+}
+
+/* my info */
+.myInfoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.myInfoPlaytime {
+  padding: 10px;
+}
+.myInfoStar {
+  padding: 10px;
+}
+
 /* view page */
 .viewpage {
 }
+.viewpageTitleContainer {
+}
 .viewpageTitle {
+  color: black;
   width: 800px;
   font-size: 50px;
 }
@@ -96,7 +203,7 @@ textarea::placeholder {
 }
 .viewpageTime {
   width: 800px;
-  font-size: 30px;
+  font-size: 20px;
   color: grey;
 }
 
@@ -133,15 +240,84 @@ textarea::placeholder {
   text-align: center;
   font-size: 30px;
   padding: 30px;
+  width: 100%;
+
+  /* 텍스트 생략 관련 스타일 */
+  white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+  overflow: hidden; /* 내용이 넘칠 경우 숨김 */
+  text-overflow: ellipsis; /* 내용이 넘칠 경우 생략 부호 표시 */
 }
 .cardDate {
   padding: 10px;
 }
+/* Game side bar */
+.gameSide {
+  width: 400px;
+  height: calc(
+    100vh - 2 * var(--navbar-height)
+  ); /* --navbar-height는 상단 네비게이션 바의 높이 */
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: var(--navbar-height);
+
+  background-color: #f5f5f5;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+
+  overflow-y: auto;
+}
+.gameSideContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  border: 1px solid black;
+}
+
+.gameSideContents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gameSideTitle {
+  font-size: 15px;
+  white-space: nowrap; /* 텍스트를 줄바꿈 없이 한 줄로 만듦 */
+  overflow: hidden; /* 컨테이너를 넘어가는 텍스트를 숨김 */
+  text-overflow: ellipsis; /* 숨겨진 텍스트를 생략 기호로 표시 */
+  max-width: 190px; /* 예시로 150px 설정 */
+}
+.gameSidePlayTime {
+  font-size: 12px;
+  color: black;
+}
+
+.gameSideImg {
+  width: 50px;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.gameSideBtnContainer {
+  margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gameSideBtn {
+}
+
 /* Owned game page */
 .ownedGamesPage {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 50px;
   padding-top: var(--navbar-height);
 }
 
@@ -194,7 +370,7 @@ textarea::placeholder {
 }
 
 .formTitle {
-  font-size: 50px;
+  font-size: 40px;
 }
 .formTitle2 {
   font-size: 25px;

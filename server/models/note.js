@@ -2,8 +2,26 @@ const mongoose = require("mongoose");
 
 const noteSchema = new mongoose.Schema(
   {
+    // User input data
     title: String,
     body: String,
+    playTime: Number,
+    starRatingAll: {
+      starRatingA: Number,
+      starRatingB: Number,
+    },
+    starRatingOverall: Number,
+    genre: String,
+    developer: String,
+    publisher: String,
+    releaseDate: String,
+    metacriticUrl: String,
+    price: String,
+    steamRec: String,
+    supportKorean: Boolean,
+    imgurl: String,
+
+    // Automatically created by mongoose
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -12,12 +30,6 @@ const noteSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    playTime: Number,
-    starRatingAll: {
-      starRatingA: Number,
-      starRatingB: Number,
-    },
-    starRatingOverall: Number,
   },
   {
     timestamps: true,

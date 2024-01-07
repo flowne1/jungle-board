@@ -19,16 +19,11 @@ export default function Card({ note }) {
       key={note._id}
       onClick={handleCardClick}
     >
-      <img
-        className={styles.cardImg}
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjIqqK4TYpTiCvwSBNr0LshkTxvyoksJAZbg&usqp=CAU"
-        alt="Card Img"
-      ></img>
+      <img className={styles.cardImg} src={note.imgurl} alt="Card Img"></img>
       <div className={styles.cardTitle}>
         {note.title}
         <br />
         <PrintStarRatingForm starRatingValue={note.starRatingAll.starRatingA} />
-        <PrintStarRatingForm starRatingValue={note.starRatingAll.starRatingB} />
       </div>
       <div>
         <button

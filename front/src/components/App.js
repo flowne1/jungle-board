@@ -9,6 +9,7 @@ import Navbar from "./Navbar";
 import CreatePage from "../pages/CreatePage";
 import ViewPage from "../pages/ViewPage";
 import OwnedGamesPage from "../pages/OwnedGamesPage";
+import UpdatePage from "../pages/UpdatePage";
 
 function App() {
   return (
@@ -36,14 +37,28 @@ function App() {
               </RequireAuth>
             }
           />
+          {/* printing UpdatePage */}
+          <Route
+            path="/update/:noteId"
+            element={
+              <RequireAuth>
+                <UpdatePage />
+              </RequireAuth>
+            }
+          />
           {/* printing SignupPage */}
           <Route path="/signup" element={<SignupPage />} />
           {/* printing LogoutPage */}
           <Route path="/logout" element={<LogoutPage />} />
           {/* printing ViewPage */}
-          <Route path="/viewpage/:noteId" element={<ViewPage />} />
-          {/* printing OwnedGamesPage */}
-          <Route path="/steam/owned-games" element={<OwnedGamesPage />} />
+          <Route
+            path="/viewpage/:noteId"
+            element={
+              <RequireAuth>
+                <ViewPage />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

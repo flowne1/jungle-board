@@ -36,9 +36,9 @@ export default function StarRatingForm({ ratingName }) {
           </label>
         );
       })}
-      <div>
+      {/* <div>
         Current Rating for {ratingName}: {InStoreRating}
-      </div>
+      </div> */}
     </div>
   );
 }

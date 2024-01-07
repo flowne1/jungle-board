@@ -4,7 +4,7 @@ const Note = require("../models/note");
 const fetchNotes = async (req, res) => {
   try {
     // Find the notes
-    const notes = await Note.find({ user: req.user._id });
+    const notes = await Note.find();
     // Respond with them
     res.json({ notes });
   } catch (error) {
@@ -31,11 +31,21 @@ const createNote = async (req, res) => {
   try {
     // Get the sent in data off request body
     const { createForm, starRatingAll } = req.body;
-    console.log(createForm), console.log(starRatingAll);
+
     // Create a note with it
     const note = await Note.create({
       title: createForm.title,
       body: createForm.body,
+      playTime: createForm.playTime,
+      genre: createForm.genre,
+      developer: createForm.developer,
+      publisher: createForm.publisher,
+      releaseDate: createForm.releaseDate,
+      metacriticUrl: createForm.metacriticUrl,
+      price: createForm.price,
+      steamRec: createForm.steamRec,
+      supportKorean: createForm.supportKorean,
+      imgurl: createForm.imgurl,
       user: req.user._id,
       starRatingAll,
     });

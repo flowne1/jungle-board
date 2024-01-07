@@ -51,7 +51,23 @@ async function getOwnedGames(req, res) {
   }
 }
 
+async function getAppDetails(req, res) {
+  // Get the id off the url
+  const appid = req.params.appid;
+
+  try {
+    const appRes = await axios.get(
+      `https://store.steampowered.com/api/appdetails?l=english&appids=${appid}`
+    );
+
+    res.json(appRes.data[appid]);
+  } catch (error) {
+    res.status(500).send("Failed to retrieve app details: " + error.message);
+  }
+}
+
 module.exports = {
   getUserFromToken,
   getOwnedGames,
+  getAppDetails,
 };

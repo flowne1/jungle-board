@@ -18,9 +18,6 @@ export default function Navbar() {
         {store.loggedIn && (
           <>
             <li>
-              <Link to="/steam/owned-games">보유중인 게임</Link>
-            </li>
-            <li>
               <Link to="/logout">로그아웃</Link>
             </li>
           </>

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import GameCardForm from "../components/GameCardForm";
 import styles from "../styles.module.css";
 import steamStore from "../stores/steamStore";
 
@@ -11,6 +10,7 @@ export default function OwnedGamesPage() {
   }, []);
 
   const games = store.ownedGames;
+  const appDetails = store.appDetails;
 
   // 게임 데이터가 로드되기 전에 로딩 메시지 표시
   if (!games) {
@@ -28,13 +28,25 @@ export default function OwnedGamesPage() {
               alt="noimage!"
             ></img>
             <div className={styles.gameCardContents}>
+              <div>{game.appid}</div>
               <div className={styles.gameCardTitle}>{game.name}</div>
               <div className={styles.gameCardPlayTime}>
                 playtime : {game.playtime_forever}
               </div>
+              {appDetails && appDetails[game.appid] ? (
+                <div>게임 정보가 있습니다</div>
+              ) : (
+                <div>게임 정보를 불러오는 중입니다</div>
+              )}
             </div>
             <div className={styles.gameCardReviewBtn}>
-              <button>리뷰 작성하기</button>
+              <button
+                onClick={() => {
+                  store.getAppDetails(game.appid);
+                }}
+              >
+                정보 가져오기
+              </button>
             </div>
           </div>
         ))}
