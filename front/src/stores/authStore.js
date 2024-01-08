@@ -13,6 +13,7 @@ const authStore = create((set) => ({
     email: "",
     password: "",
     passwordCheck: "",
+    steamId64: "",
   },
 
   login: async (e) => {
@@ -113,8 +114,9 @@ const authStore = create((set) => ({
   },
 
   checkAuth: async () => {
+    console.log("check auth...");
     try {
-      await axios.get("/check-auth");
+      const result = await axios.get("/check-auth");
       set({ loggedIn: true });
     } catch (err) {
       set({ loggedIn: false });

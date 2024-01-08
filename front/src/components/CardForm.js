@@ -25,32 +25,7 @@ export default function Card({ note }) {
         <br />
         <PrintStarRatingForm starRatingValue={note.starRatingAll.starRatingA} />
       </div>
-      <div>
-        <button
-          onClick={(e) => {
-            store.deleteNote(note._id);
-            e.stopPropagation();
-          }}
-        >
-          Show
-        </button>
-        <button
-          onClick={(e) => {
-            store.deleteNote(note._id);
-            e.stopPropagation();
-          }}
-        >
-          Delete
-        </button>
-        <button
-          onClick={(e) => {
-            store.toggleUpdate(note);
-            e.stopPropagation();
-          }}
-        >
-          Update
-        </button>
-      </div>
+      <div>written by : {note.userEmail}</div>
       <div className={styles.cardDate}>
         {new Date(note.createdAt).toLocaleString("en-CA", { hour12: false })}{" "}
         <br />

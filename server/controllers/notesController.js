@@ -1,5 +1,6 @@
 const { model } = require("mongoose");
 const Note = require("../models/note");
+const Comment = require("../models/comment");
 
 const fetchNotes = async (req, res) => {
   try {
@@ -18,7 +19,7 @@ const fetchNote = async (req, res) => {
     // Get id off the url
     const noteId = req.params.id;
     // Find the note using that id
-    const note = await Note.findOne({ _id: noteId, user: req.user._id });
+    const note = await Note.findOne({ _id: noteId });
     // Respond with the note
     res.json({ note });
   } catch (error) {
@@ -48,6 +49,7 @@ const createNote = async (req, res) => {
       imgurl: createForm.imgurl,
       user: req.user._id,
       starRatingAll,
+      userEmail: req.user.email,
     });
     // Respond with the new note
     res.json({ note });
@@ -61,22 +63,35 @@ const updateNote = async (req, res) => {
   try {
     // Get the id off the url
     const noteId = req.params.id;
+    console.log(noteId);
 
     // Get the data off the req body
-    const { title, body } = req.body;
+    const { createForm, starRatingAll } = req.body;
 
     // Find and update the record
     const note = await Note.findOneAndUpdate(
       { _id: noteId, user: req.user._id },
       {
-        title,
-        body,
+        title: createForm.title,
+        body: createForm.body,
+        playTime: createForm.playTime,
+        genre: createForm.genre,
+        developer: createForm.developer,
+        publisher: createForm.publisher,
+        releaseDate: createForm.releaseDate,
+        metacriticUrl: createForm.metacriticUrl,
+        price: createForm.price,
+        steamRec: createForm.steamRec,
+        supportKorean: createForm.supportKorean,
+        imgurl: createForm.imgurl,
+        user: req.user._id,
+        starRatingAll,
       },
       { new: true }
     );
 
     // Respond with it
-    res.json({ note });
+    res.sendStatus(200);
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
@@ -92,15 +107,20 @@ const deleteNote = async (req, res) => {
     const result = await Note.deleteOne({ _id: noteId, user: req.user._id });
 
     // Check if the note was actually found and deleted
-    if (!result) {
+    if (result.deletedCount === 0) {
       return res.status(404).json({ error: "Note not found" });
     }
+
+    console.log(result);
+
+    // Find and delete all comments of the note
+    const cmtResult = await Comment.deleteMany({ noteId });
 
     // Respond with success message
     res.json({ success: "Record deleted" });
   } catch (error) {
     console.log(error);
-    req.sendStatus(400);
+    res.sendStatus(400);
   }
 };
 

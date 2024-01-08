@@ -20,6 +20,32 @@
   font-style: normal;
 }
 
+@keyframes rotateForward {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotateBackward {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.rotateForward {
+  animation: rotateForward 0.5s linear;
+}
+
+.rotateBackward {
+  animation: rotateBackward 0.5s linear;
+}
+
 /* global style */
 .App {
   width: 100%;
@@ -185,14 +211,47 @@ textarea::placeholder {
 
 /* view page */
 .viewpage {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: var(--navbar-height);
 }
+
+.viewform {
+}
+
 .viewpageTitleContainer {
+  display: flex;
+  flex-direction: row;
 }
 .viewpageTitle {
   color: black;
-  width: 800px;
-  font-size: 50px;
+  width: 600px;
+  font-size: min(max(3vw, 30px), 50px);
 }
+
+.viewpageMyinfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.viewpageMyinfoItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid grey; */
+  border-bottom: 1px solid grey;
+  border-top: 1px solid grey;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+}
+
 .viewpageImg {
 }
 .viewpageBody {
@@ -202,8 +261,8 @@ textarea::placeholder {
   font-size: 25px;
 }
 .viewpageTime {
-  width: 800px;
-  font-size: 20px;
+  width: 100%;
+  font-size: 16px;
   color: grey;
 }
 
@@ -252,25 +311,35 @@ textarea::placeholder {
 }
 /* Game side bar */
 .gameSide {
+  z-index: 1000;
   width: 400px;
-  height: calc(
-    100vh - 2 * var(--navbar-height)
-  ); /* --navbar-height는 상단 네비게이션 바의 높이 */
+  height: calc(100vh); /* --navbar-height는 상단 네비게이션 바의 높이 */
 
   position: fixed;
   top: 0;
   left: 0;
-
   display: flex;
   align-items: center;
   flex-direction: column;
-  padding-top: var(--navbar-height);
-
-  background-color: #f5f5f5;
   box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
-
   overflow-y: auto;
+  transition: left 0.5s ease; /* 애니메이션 효과 추가 */
+  left: -0px; /* 초기 위치 설정 */
+
+  background-color: white;
 }
+
+/* 사이드바 열림 상태 스타일 */
+.gameSideToggleBtn {
+  width: 50px;
+  height: 50px;
+  position: fixed;
+  font-size: 30px;
+  left: 400px;
+  transition: left 0.5s ease; /* 애니메이션 효과 추가 */
+  top: 40%;
+}
+
 .gameSideContainer {
   display: flex;
   flex-direction: row;
@@ -310,6 +379,16 @@ textarea::placeholder {
 }
 
 .gameSideBtn {
+}
+
+.gameSideSortContainer {
+  padding: 10px;
+}
+
+.gameSideSortBtn {
+  padding: 5px;
+  margin: 5px;
+  width: 100px;
 }
 
 /* Owned game page */
@@ -423,6 +502,40 @@ textarea::placeholder {
   width: 309px;
   height: 50px;
   margin: 10px;
+}
+
+/* comment */
+.commentForm {
+  border: 1px solid black;
+  width: 100%;
+}
+.commentTop {
+  display: flex;
+  align-items: flex-end;
+  background-color: lightgrey;
+  font-size: 18px;
+}
+.commentContents {
+  font-size: 15px;
+}
+
+.commentDate {
+  color: black;
+  font-size: 12px;
+  padding-left: 10px;
+}
+
+.commentBtns {
+}
+
+.commentInputText {
+}
+.commentInputText textarea {
+  width: 99%;
+  height: 50px;
+}
+.commentInputText textarea::placeholder {
+  font-size: 15px;
 }
 
 /* etc */

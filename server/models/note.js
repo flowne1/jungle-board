@@ -20,8 +20,8 @@ const noteSchema = new mongoose.Schema(
     steamRec: String,
     supportKorean: Boolean,
     imgurl: String,
+    userEmail: String,
 
-    // Automatically created by mongoose
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

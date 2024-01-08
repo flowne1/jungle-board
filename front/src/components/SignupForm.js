@@ -52,9 +52,16 @@ export default function SignupForm() {
         value={store.signupForm.passwordCheck}
         name="passwordCheck"
       />
-      <br />
+      <span className={styles.formTitle2}>스팀 ID (64)</span>
+      <input
+        className={styles.inputSignup}
+        type="text"
+        onChange={store.updateSignupFormField}
+        value={store.signupForm.steamId64}
+        name="steamId64"
+      />
       <button className={styles.buttonSignup} type="submit">
-        Signup
+        가입하기
       </button>
     </form>
   );

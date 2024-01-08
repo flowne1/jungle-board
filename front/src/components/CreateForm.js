@@ -1,6 +1,6 @@
 import notesStore from "../stores/notesStore";
 import styles from "../styles.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import GameInfoInputForm from "./GameInfoInputForm";
 import MyInfoForm from "./MyInfoForm";
 import { useEffect } from "react";
@@ -8,6 +8,7 @@ import { useEffect } from "react";
 export default function CreateForm({ type, note }) {
   const store = notesStore();
   const navigate = useNavigate();
+  const { noteId } = useParams();
 
   useEffect(() => {
     // If type === "update", set create form via note
@@ -28,15 +29,20 @@ export default function CreateForm({ type, note }) {
   const handleUpdate = async (e) => {
     e.preventDefault();
 
-    await store.updateNote();
+    await store.updateNote(noteId);
 
     // After update, navigate to view page
-    navigate("/");
+    navigate(`/viewpage/${noteId}`);
   };
 
   return (
-    <form className={styles.inputForm} onSubmit={handleCreate}>
-      <span className={styles.formTitle}>새 리뷰 작성하기</span>
+    <form
+      className={styles.inputForm}
+      onSubmit={type === "update" ? handleUpdate : handleCreate}
+    >
+      <div className={styles.formTitle}>
+        {type === "update" ? "리뷰 수정하기" : "새 리뷰 작성하기"}
+      </div>
       <br />
       <input
         className={styles.inputTitle}
@@ -59,7 +65,7 @@ export default function CreateForm({ type, note }) {
       />
       <br />
       <button className={styles.buttonCreate} type="submit">
-        Create note
+        {type === "update" ? "Update note" : "Create note"}
       </button>
     </form>
   );

@@ -3,8 +3,8 @@ import axios from "axios";
 
 const notesStore = create((set, get) => ({
   notes: null,
-
   tempNote: null,
+  comments: null,
 
   createFormDefault: {
     title: "",
@@ -36,9 +36,8 @@ const notesStore = create((set, get) => ({
     playTime: "",
   },
 
-  updateForm: {
-    title: "",
-    body: "",
+  commentForm: {
+    contents: "",
   },
 
   fetchNotes: async () => {
@@ -58,12 +57,59 @@ const notesStore = create((set, get) => ({
       // Find by noteId and fetch the note
       const res = await axios.get(`/notes/${noteId}`);
 
-      console.log(notesStore.getState().tempNote);
-
       // Return proper note
       set({ tempNote: res.data.note });
     } catch (error) {
       console.error("Error fetching note", error);
+    }
+  },
+
+  // Comments
+
+  fetchCommentAll: async (noteId) => {
+    try {
+      const res = await axios.get(`/notes/${noteId}/comments`);
+
+      set({ comments: res.data.comments });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  createComment: async (noteId) => {
+    //
+    const commentForm = notesStore.getState().commentForm;
+
+    try {
+      const res = await axios.post(`/notes/${noteId}/comments`, commentForm);
+
+      set((state) => ({
+        commentForm: {
+          ...state.commentForm,
+          contents: "",
+        },
+      }));
+
+      notesStore.getState().fetchCommentAll(noteId);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  deleteComment: async (comment) => {
+    const commentId = comment._id;
+    const noteId = comment.noteId;
+
+    try {
+      const res = await axios.delete(`/notes/${noteId}/comments/delete`, {
+        data: { commentId: commentId },
+      });
+
+      notesStore.getState().fetchCommentAll(noteId);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
     }
   },
 
@@ -158,7 +204,7 @@ const notesStore = create((set, get) => ({
           genre: note.genre,
           developer: note.developer,
           publisher: note.publisher,
-          releaseDate: note.releaseDatae,
+          releaseDate: note.releaseDate,
           metacriticUrl: note.metacriticUrl,
           price: note.price,
           steamRec: note.steamRec,
@@ -170,21 +216,34 @@ const notesStore = create((set, get) => ({
     });
   },
 
-  updateNote: async () => {
-    const { updateForm } = notesStore.getState();
-    await axios.put(`/notes/${updateForm._id}`, updateForm);
-  },
+  updateNote: async (noteId) => {
+    // const { updateForm } = notesStore.getState();
+    // await axios.put(`/notes/${updateForm._id}`, updateForm);
 
-  toggleUpdate: (note) => {
-    set(() => {
-      return {
-        updateForm: {
-          _id: note._id,
-          title: note.title,
-          body: note.body,
-        },
+    try {
+      const { createForm, starRatingAll } = notesStore.getState();
+
+      // Make object to be sent to server
+      const createData = {
+        createForm,
+        starRatingAll,
       };
-    });
+
+      // Update the note
+      const res = await axios.put(`/notes/${noteId}`, createData);
+
+      // Update and clear form state
+      set({
+        createForm: { ...notesStore.getState().defaultCreateForm },
+        starRatingAll: {
+          starRatingA: 0,
+          starRatingB: 0,
+        },
+      });
+    } catch (error) {
+      // Handle the error appropriately
+      console.error("Error updating note:", error);
+    }
   },
 
   updateUpdateFormField: (e) => {
@@ -200,12 +259,31 @@ const notesStore = create((set, get) => ({
     });
   },
 
-  deleteNote: async (_id) => {
-    // Delete the note
-    const res = await axios.delete(`/notes/${_id}`);
+  updateCommentFormField: (e) => {
+    const { name, value } = e.target;
 
-    // Update state
-    await get().fetchNotes();
+    set((state) => {
+      return {
+        commentForm: {
+          ...state.updateForm,
+          [name]: value,
+        },
+      };
+    });
+
+    console.log(notesStore.getState().commentForm);
+  },
+
+  deleteNote: async (_id) => {
+    try {
+      // Delete the note
+      const res = await axios.delete(`/notes/${_id}`);
+
+      // Update state
+      await get().fetchNotes();
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   starRatingAll: {

@@ -6,10 +6,10 @@ export default function RequireAuth(props) {
   const store = authStore();
 
   useEffect(() => {
-    if (store.loggedIn === null) {
+    if (store.loggedIn !== true) {
       store.checkAuth();
     }
-  }, []);
+  });
 
   if (store.loggedIn === null) {
     return <div>Loading . . .</div>;

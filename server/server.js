@@ -11,6 +11,7 @@ const Note = require("./models/note");
 const notesController = require("./controllers/notesController");
 const usersController = require("./controllers/usersController");
 const steamController = require("./controllers/steamController");
+const commentController = require("./controllers/commentController");
 const cookieParser = require("cookie-parser");
 const requireAuth = require("./middleware/requireAuth");
 
@@ -47,6 +48,23 @@ app.get("/notes/:id", requireAuth, notesController.fetchNote);
 app.post("/notes", requireAuth, notesController.createNote);
 app.put("/notes/:id", requireAuth, notesController.updateNote);
 app.delete("/notes/:id", requireAuth, notesController.deleteNote);
+
+// Comment - related APIs
+app.post(
+  "/notes/:noteId/comments",
+  requireAuth,
+  commentController.createComment
+);
+app.get(
+  "/notes/:noteId/comments",
+  requireAuth,
+  commentController.fetchCommentAll
+);
+app.delete(
+  "/notes/:noteId/comments/delete",
+  requireAuth,
+  commentController.deleteComment
+);
 
 // Steam - related APIs
 app.get("/steam/owned-games", requireAuth, steamController.getOwnedGames);
