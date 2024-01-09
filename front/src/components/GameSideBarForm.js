@@ -40,6 +40,7 @@ export default function OwnedGamesPage() {
         <input
           style={{ width: "300px" }}
           onChange={(e) => handleFiltering(e.target.value)}
+          value={store.filterString}
         ></input>
         <div className={styles.gameSideSortContainer}>
           <button
