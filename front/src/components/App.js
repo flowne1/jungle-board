@@ -1,6 +1,6 @@
 import LoginPage from "../pages/LoginPage";
 import NotesPage from "../pages/NotesPage";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
 import SignupPage from "../pages/SignupPage";
 import LogoutPage from "../pages/LogoutPage";
@@ -8,7 +8,6 @@ import styles from "../styles.module.css";
 import Navbar from "./Navbar";
 import CreatePage from "../pages/CreatePage";
 import ViewPage from "../pages/ViewPage";
-import OwnedGamesPage from "../pages/OwnedGamesPage";
 import UpdatePage from "../pages/UpdatePage";
 
 function App() {
