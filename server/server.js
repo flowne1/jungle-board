@@ -7,6 +7,7 @@ if (process.env.NODE_ENV != "production") {
 const express = require("express");
 const cors = require("cors");
 const connectToDb = require("./config/connectToDb");
+const corsOptions = require("./config/corsOptions");
 const Note = require("./models/note");
 const notesController = require("./controllers/notesController");
 const usersController = require("./controllers/usersController");
@@ -21,12 +22,7 @@ const app = express();
 // Configure express app
 app.use(express.json());
 app.use(cookieParser());
-app.use(
-  cors({
-    origin: true,
-    credentials: true,
-  })
-);
+app.use(cors(corsOptions));
 
 // Connect to database
 connectToDb();
