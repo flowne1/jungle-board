@@ -196,6 +196,7 @@ const notesStore = create((set, get) => ({
   },
 
   updateCreateFormByNote: (note) => {
+    console.log(note);
     set((state) => {
       return {
         createForm: {
