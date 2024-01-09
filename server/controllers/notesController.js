@@ -46,7 +46,7 @@ const createNote = async (req, res) => {
       metacriticUrl: createForm.metacriticUrl,
       price: createForm.price,
       steamRec: createForm.steamRec,
-      supportKorean: createForm.supporstKorean,
+      supportKorean: createForm.supportKorean,
       imgurl: createForm.imgurl,
       user: req.user._id,
       starRatingAll,
