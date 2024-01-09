@@ -1,6 +1,6 @@
 const allowedOrigins = [
   "https://front-end-3rgo.onrender.com",
-  // 필요에 따라 더 많은 도메인을 추가할 수 있습니다.
+  // 필요에 따라 더 많은 도메인을 추가할 수 있음
 ];
 
 const corsOptions = {
