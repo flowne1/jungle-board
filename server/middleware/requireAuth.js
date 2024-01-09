@@ -11,13 +11,13 @@ async function requireAuth(req, res, next) {
 
     // Check expiration
     if (Date.now() > decoded.exp) {
-      return res.sendStatus(401).send("Cookie Expired!");
+      return res.status(401).send("Cookie Expired!");
     }
 
     // Find user using decoded sub
     const user = await User.findById(decoded.sub);
     if (!user) {
-      return res.sendStatus(401);
+      return res.status(401).send("user not found");
     }
 
     // Attach user to request
@@ -26,7 +26,7 @@ async function requireAuth(req, res, next) {
     // Continue on
     next();
   } catch (err) {
-    return res.sendStatus(401);
+    return res.status(401).send("error occured in requireAuth");
   }
 }
 
