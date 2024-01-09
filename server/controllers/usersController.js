@@ -72,7 +72,10 @@ async function login(req, res) {
 function logout(req, res) {
   try {
     // Delete cookie
-    res.clearCookie("Authorization").status(200).send("Cookie destroyed");
+    res
+      .clearCookie("Authorization", { secure: true, sameSite: "none" })
+      .status(200)
+      .send("Cookie destroyed");
   } catch (err) {
     res.sendStatus(500);
   }
