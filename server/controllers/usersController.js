@@ -55,8 +55,8 @@ async function login(req, res) {
         .cookie("Authorization", token, {
           expires: new Date(exp),
           httpOnly: true,
-          sameSite: "lax",
-          secure: process.env.NODE_ENV === "production",
+          sameSite: "None",
+          secure: true,
         })
         .send("Login Successful");
     } else {

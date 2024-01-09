@@ -6,6 +6,7 @@ const fetchNotes = async (req, res) => {
   try {
     // Find the notes
     const notes = await Note.find();
+
     // Respond with them
     res.json({ notes });
   } catch (error) {
