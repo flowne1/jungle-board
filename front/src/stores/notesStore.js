@@ -54,6 +54,8 @@ const notesStore = create((set, get) => ({
 
   fetchNote: async (noteId) => {
     try {
+      set({ tempNote: null });
+
       // Find by noteId and fetch the note
       const res = await axios.get(`/notes/${noteId}`);
 
