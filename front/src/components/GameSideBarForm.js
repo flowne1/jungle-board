@@ -14,11 +14,16 @@ export default function OwnedGamesPage() {
     setIsSideBarOpen(!isSideBarOpen); // 상태 토글
   };
 
+  const handleFiltering = (input) => {
+    store.setFilterString(input);
+    store.doFilter();
+  };
+
   useEffect(() => {
     store.fetchOwnedGames();
   }, []);
 
-  const games = store.ownedGames;
+  const games = store.displayedGames;
   const appDetails = store.appDetails;
 
   // 게임 데이터가 로드되기 전에는 빈 div 표시
@@ -32,10 +37,24 @@ export default function OwnedGamesPage() {
         className={styles.gameSide}
         style={{ left: isSideBarOpen ? "0px" : "-400px" }}
       >
+        <input
+          style={{ width: "300px" }}
+          onChange={(e) => handleFiltering(e.target.value)}
+        ></input>
         <div className={styles.gameSideSortContainer}>
-          <button className={styles.gameSideSortBtn}>버튼1</button>
-          <button className={styles.gameSideSortBtn}>버튼2</button>
-          <button className={styles.gameSideSortBtn}>버튼3</button>
+          <button
+            className={styles.gameSideSortBtn}
+            onClick={store.sortByPlaytime}
+          >
+            {store.sortOrder === "" && "시간정렬-"}
+            {store.sortOrder === "ascending" && "시간정렬↑"}
+            {store.sortOrder === "descending" && "시간정렬↓"}
+          </button>
+          <button className={styles.gameSideSortBtn} onClick={store.sortByName}>
+            {store.sortNameOrder === "" && "사전정렬-"}
+            {store.sortNameOrder === "ascending" && "사전정렬↑"}
+            {store.sortNameOrder === "descending" && "사전정렬↓"}
+          </button>
         </div>
         <div>
           {games.map((game, index) => (

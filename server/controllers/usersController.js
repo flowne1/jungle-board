@@ -55,8 +55,8 @@ async function login(req, res) {
         .cookie("Authorization", token, {
           expires: new Date(exp),
           httpOnly: true,
-          sameSite: "None",
-          secure: true,
+          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
         })
         .send("Login Successful");
     } else {
@@ -83,10 +83,6 @@ function logout(req, res) {
 
 async function checkAuth(req, res) {
   try {
-    console.log("checking auth...");
-
-    console.log("check auth req : ", req);
-
     // 쿠키에서 특정 쿠키(예: 'Authorization') 확인
     const token = req.cookies["Authorization"];
 
