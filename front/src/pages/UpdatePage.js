@@ -13,6 +13,10 @@ export default function UpdatePage() {
     store.fetchNote(noteId);
   }, []);
 
+  if (!store.tempNote) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className={styles.page}>
       <GameSideBarForm />
