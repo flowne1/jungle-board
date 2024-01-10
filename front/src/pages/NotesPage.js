@@ -12,6 +12,10 @@ export default function NotesPage() {
     store.fetchNotes();
   }, []);
 
+  if (store.notes === null) {
+    return <div>loading...</div>;
+  }
+
   return (
     <div className={styles.cardPage}>
       <Notes />
